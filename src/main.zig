@@ -32,6 +32,7 @@ const Model = struct {
                     return;
                 }
             },
+
             // We can request a specific widget gets focus. In this case, we always want to focus
             // our button. Having focus means that key events will be sent up the widget tree to
             // the focused widget, and then bubble back down the tree to the root. Users can tell
