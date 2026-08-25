@@ -76,7 +76,18 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    // ... snip ...
 
+    const lua_dep = b.dependency("zlua", .{
+        .target = target,
+        .optimize = optimize,
+        .lang = .luajit,
+    });
+
+    // ... snip ...
+
+    // add the zlua module and lua artifact
+    exe.root_module.addImport("zlua", lua_dep.module("zlua"));
     exe.root_module.addImport("vaxis", vaxis.module("vaxis"));
 
     // This declares intent for the executable to be installed into the

@@ -36,6 +36,10 @@
             .url = "git+https://github.com/rockorager/libvaxis.git#c060d314930c5552b99a89278a6a695baf0352da",
             .hash = "vaxis-0.6.0-BWNV_LC4CwBka_bJk8SOXqzCM-nyQH00jzdL0kUhGwRE",
         },
+        .zlua = .{
+            .url = "git+https://github.com/natecraddock/ziglua#7c3d84517202e1f3f4bba4256d6eeaaa1a45c2d0",
+            .hash = "zlua-0.1.0-hGRpC_2UBQCaep7QI_CWCs3cREj5tlWbQBhBUWt_OaB8",
+        },
     },
     .paths = .{
         "build.zig",
