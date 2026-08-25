@@ -1,3 +1,6 @@
 # VTTerm - A virtual tabletop in the terminal
 
-Asdf...
+## depends on...
+
+- libvaxis
+- ziglua
