@@ -23,12 +23,23 @@ pub fn build(b: *std.Build) void {
     const lua_dep = b.dependency("zlua", .{
         .target = target,
         .optimize = optimize,
-        .lang = .luajit,
+        //.lang = .luajit,
     });
+    const xml_dep = b.dependency(
+        "xml",
+        .{
+            .target = target,
+            .optimize = optimize,
+        },
+    );
 
     // ADD MODULES HERE
     exe.root_module.addImport("zlua", lua_dep.module("zlua"));
     exe.root_module.addImport("vaxis", vaxis.module("vaxis"));
+    exe.root_module.addImport(
+        "xml",
+        xml_dep.module("xml"),
+    );
 
     b.installArtifact(exe);
 

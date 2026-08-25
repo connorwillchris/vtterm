@@ -1,22 +1,25 @@
 const std = @import("std");
+
+// comptime types
 const json = std.json;
 
-const ModInfo = struct {
-    mod_name: []const u8,
-    description: []const u8,
+const ModConfig = struct {
+    name: []const u8,
     version: []const u8,
+    display_name: []const u8,
+    description: []const u8,
     authors: []const []const u8,
 
-    pub fn loadMod(s: []const u8, allocator: std.mem.Allocator) !ModInfo {
+    // versions
+    vtt_version: []const u8,
+
+    pub fn loadMod(s: []const u8, allocator: std.mem.Allocator) !ModConfig {
         const parsed =
-            try json.parseFromSlice(ModInfo, allocator, s, .{});
+            try json.parseFromSlice(ModConfig, allocator, s, .{});
         defer parsed.deinit();
 
         const parsed_values = parsed.value;
 
-        return ModInfo{
-            .mod_name = parsed_values.mod_name,
-            .version = parsed_values.version,
-        };
+        return parsed_values orelse undefined;
     }
 };
