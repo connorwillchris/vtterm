@@ -37,16 +37,13 @@
             .hash = "vaxis-0.6.0-BWNV_LC4CwBka_bJk8SOXqzCM-nyQH00jzdL0kUhGwRE",
         },
         .zlua = .{
-            .url = "git+https://github.com/natecraddock/ziglua#7c3d84517202e1f3f4bba4256d6eeaaa1a45c2d0",
-            .hash = "zlua-0.1.0-hGRpC_2UBQCaep7QI_CWCs3cREj5tlWbQBhBUWt_OaB8",
+            .url = "git+https://github.com/natecraddock/ziglua#9ae39fa50b1ab8427d35f963216116d7bff1e584",
+            .hash = "zlua-0.1.0-hGRpC1mUBQCNQf4CnmRTM4I7gxE3YpCvZ-p2EarlcyER",
         },
     },
     .paths = .{
         "build.zig",
         "build.zig.zon",
         "src",
-        // For example...
-        //"LICENSE",
-        //"README.md",
     },
 }

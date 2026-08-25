@@ -1,7 +1,9 @@
 const std = @import("std");
 const vaxis = @import("vaxis");
 const vxfw = vaxis.vxfw;
+
 const zlua = @import("zlua");
+const Lua = zlua.Lua;
 
 /// Our main application state
 const Model = struct {
@@ -119,6 +121,18 @@ const Model = struct {
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
     const alloc = init.gpa;
+
+    // lua init here
+    var lua = try Lua.init(alloc);
+    defer lua.deinit();
+
+    lua.pushInteger(42);
+    std.debug.print(
+        "{}\n",
+        .{
+            try lua.toInteger(1),
+        },
+    );
 
     var buffer: [1024]u8 = undefined;
     var app: vxfw.App = try .init(io, alloc, init.environ_map, &buffer);
