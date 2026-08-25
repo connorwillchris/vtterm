@@ -7,11 +7,9 @@ const ModInfo = struct {
     version: []const u8,
     authors: []const []const u8,
 
-    pub fn loadMod(allocator: std.mem.Allocator) !ModInfo {
-        // test string
-        const s = "{ \"name\": \"Alice\" }";
-
-        const parsed = try json.parseFromSlice(ModInfo, allocator, s, .{});
+    pub fn loadMod(s: []const u8, allocator: std.mem.Allocator) !ModInfo {
+        const parsed =
+            try json.parseFromSlice(ModInfo, allocator, s, .{});
         defer parsed.deinit();
 
         const parsed_values = parsed.value;
