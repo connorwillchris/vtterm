@@ -21,28 +21,19 @@ pub fn main(init: std.process.Init) !void {
     , .{});
     defer reader.deinit();
 
-    var text: ?[]const u8 = null;
+    //var text: ?[]const u8 = null;
     while (true) {
         const event = try reader.interface.read();
 
         switch (event) {
-            .text => |value| {
-                text = value;
-            },
-
-            .element_end => {
-                if (text) |value| {
-                    std.debug.print("{s}\n", .{value});
-                }
-
-                text = null;
-            },
-
             .eof => break,
 
-            else => {},
+            else => {
+                std.debug.print(
+                    "{}",
+                    .{event},
+                );
+            },
         }
     }
 }
-
-const Character = struct {};
