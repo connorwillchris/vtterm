@@ -40,6 +40,10 @@
             .url = "git+https://github.com/natecraddock/ziglua#9ae39fa50b1ab8427d35f963216116d7bff1e584",
             .hash = "zlua-0.1.0-hGRpC1mUBQCNQf4CnmRTM4I7gxE3YpCvZ-p2EarlcyER",
         },
+        .xml = .{
+            .url = "git+https://github.com/ianprime0509/zig-xml.git#d73304c3d56d6331a0caca4d339607e7c740aab5",
+            .hash = "xml-0.2.0-ZTbP35V4AgA_pFiWGWiBILJK7ifCCvj7mbiGfyMcEi2K",
+        },
     },
     .paths = .{
         "build.zig",
