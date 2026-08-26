@@ -1,4 +1,4 @@
-# VTTerm - A virtual tabletop in the terminal
+# VTTerm - A virtual tabletop terminal
 
 ## depends on...
 
