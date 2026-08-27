@@ -1,8 +1,12 @@
+// standard lib and external modules
 const std = @import("std");
 const vaxis = @import("vaxis");
 const zlua = @import("zlua");
-const document = @import("document.zig");
 const xml = @import("xml");
+
+// import zig files
+const document = @import("document.zig");
+const json_parser = @import("engine/json_parser.zig");
 
 const Model = document.Model;
 const vxfw = vaxis.vxfw;
@@ -10,6 +14,32 @@ const Lua = zlua.Lua;
 
 pub fn main(init: std.process.Init) !void {
     _ = init;
+}
+
+test "json parsing" {
+    const allocator = std.heap.page_allocator;
+
+    const mod_info = try json_parser.ModInfo.new(
+        allocator,
+        \\{
+        \\"name": "core",
+        \\"version": "1.0",
+        \\"description": "Core game. Necessary for Vtterm to work",
+        \\"authors": [ "cuck", "Fuyuhiko" ],
+        \\"website": "google.com"
+        \\}
+        ,
+    );
+    try json_parser.TranslationInfo.new(
+        allocator,
+        \\{
+        \\ "k1": "Fuck",
+        \\ "k2": "You"
+        \\}
+        ,
+    );
+
+    std.debug.print("Mod Info Test\nName: {s}\n\n", .{mod_info.name});
 }
 
 test "xml parsing" {
@@ -61,9 +91,4 @@ test "xml parsing" {
             else => {},
         }
     }
-
-    std.debug.print(
-        "No error's found.\n",
-        .{},
-    );
 }
