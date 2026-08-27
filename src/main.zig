@@ -4,16 +4,43 @@ const vaxis = @import("vaxis");
 const zlua = @import("zlua");
 const xml = @import("xml");
 
+const root_doc = @import("engine/root_document.zig");
+
 // import zig files
-const document = @import("document.zig");
+//const document = @import("document.zig");
 const json_parser = @import("engine/json_parser.zig");
 
-const Model = document.Model;
+//const Model = document.Model;
 const vxfw = vaxis.vxfw;
 const Lua = zlua.Lua;
 
 pub fn main(init: std.process.Init) !void {
-    _ = init;
+    //_ = init;
+    //std.debug.print("TODO: work on entry point\n", .{});
+
+    const io = init.io;
+    const alloc = init.gpa;
+
+    var buffer: [1024]u8 = undefined;
+    var app: vxfw.App = try .init(io, alloc, init.environ_map, &buffer);
+    defer app.deinit();
+
+    // We heap allocate our model because we will require a stable pointer to it in our Button
+    // widget
+    const model = try alloc.create(root_doc.Model);
+    defer alloc.destroy(model);
+
+    // Set the initial state of our button
+    model.* = .{
+        .count = 0,
+        .button = .{
+            .label = "Click me!",
+            .onClick = root_doc.Model.onClick,
+            .userdata = model,
+        },
+    };
+
+    try app.run(model.widget(), .{});
 }
 
 test "json parsing" {

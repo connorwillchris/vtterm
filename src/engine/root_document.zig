@@ -69,6 +69,7 @@ pub const Model = struct {
         const ptr = maybe_ptr orelse return;
         const self: *Model = @ptrCast(@alignCast(ptr));
         self.count +|= 1;
+
         return ctx.consumeAndRedraw();
     }
 };
