@@ -3,21 +3,15 @@ const std = @import("std");
 const vaxis = @import("vaxis");
 const zlua = @import("zlua");
 const xml = @import("xml");
-
+const colors = @import("engine/colors.zig");
 const root_doc = @import("engine/root_document.zig");
-
-// import zig files
-//const document = @import("document.zig");
 const json_parser = @import("engine/json_parser.zig");
+const random = @import("engine/random.zig");
 
-//const Model = document.Model;
 const vxfw = vaxis.vxfw;
 const Lua = zlua.Lua;
 
 pub fn main(init: std.process.Init) !void {
-    //_ = init;
-    //std.debug.print("TODO: work on entry point\n", .{});
-
     const io = init.io;
     const alloc = init.gpa;
 
@@ -118,4 +112,18 @@ test "xml parsing" {
             else => {},
         }
     }
+}
+
+test "testing colors" {
+    const code: []const u8 = "aliceblue";
+    const hex_code = colors.color_codes.get(code).?;
+
+    const c = try colors.Color.fromHexString(hex_code);
+
+    std.debug.print("HexCode: {s}\nR={} G={} B={}\n", .{
+        hex_code,
+        c.r,
+        c.g,
+        c.b,
+    });
 }
