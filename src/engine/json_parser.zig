@@ -20,38 +20,8 @@ pub const ModInfo = struct {
             string,
             .{},
         );
-
         defer mod_info.deinit();
 
         return mod_info.value;
-    }
-};
-
-pub const TranslationInfo = struct {
-    pub fn new(
-        allocator: Allocator,
-        string: []const u8,
-    ) !void {
-        var parsed = try std.json.parseFromSlice(
-            //std.json.ArrayHashMap([]const u8),
-            json.Value,
-            allocator,
-            string,
-            .{},
-        );
-        defer parsed.deinit();
-
-        const object = parsed.value.object;
-        var iterator = object.iterator();
-
-        while (iterator.next()) |e| {
-            const key = e.key_ptr.*;
-            const value = e.value_ptr.*;
-
-            std.debug.print("{s}: {s}\n", .{
-                key,
-                value.string,
-            });
-        }
     }
 };
