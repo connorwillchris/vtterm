@@ -1,6 +1,8 @@
 const std = @import("std");
 const vaxis = @import("vaxis");
 
+const vxfw = vaxis.vxfw;
+
 pub const App = struct {
     running: bool = true,
 
