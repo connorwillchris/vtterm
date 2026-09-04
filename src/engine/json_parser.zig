@@ -10,7 +10,7 @@ pub const ModInfo = struct {
     authors: []const []const u8,
     website: []const u8,
 
-    pub fn new(
+    pub fn open(
         allocator: Allocator,
         string: []const u8,
     ) !ModInfo {

@@ -10,22 +10,15 @@ pub fn build(b: *std.Build) void {
             .root_source_file = b.path("src/main.zig"),
             .target = target,
             .optimize = optimize,
-            // .imports = &.{},
         }),
     });
 
-    const vaxis = b.dependency("vaxis", .{
-        .target = target,
-        .optimize = optimize,
-    });
-    const lua_dep = b.dependency("zlua", .{
-        .target = target,
-        .optimize = optimize,
-    });
+    const vaxis = b.dependency("vaxis", .{ .target = target, .optimize = optimize });
+    const lua = b.dependency("zlua", .{ .target = target, .optimize = optimize });
     const xml = b.dependency("xml", .{ .target = target, .optimize = optimize });
 
     // ADD MODULES HERE
-    exe.root_module.addImport("zlua", lua_dep.module("zlua"));
+    exe.root_module.addImport("zlua", lua.module("zlua"));
     exe.root_module.addImport("vaxis", vaxis.module("vaxis"));
     exe.root_module.addImport("xml", xml.module("xml"));
 

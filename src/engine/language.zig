@@ -15,7 +15,7 @@ pub const Language = struct {
     lang_code: []const u8,
     lang_name: []const u8,
 
-    pub fn new(
+    pub fn open(
         allocator: Allocator,
         string: []const u8,
     ) !void {
